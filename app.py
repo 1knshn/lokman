@@ -33,7 +33,7 @@ def chat():
         # AnythingLLM'ye istek gönder
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {API_KEY}"
+            "Authorization": {API_KEY}
         }
         response = requests.post(ANYTHINGLLM_API_URL, json={"message": user_message}, headers=headers, timeout=10)
         response.raise_for_status()
