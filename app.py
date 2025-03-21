@@ -14,7 +14,7 @@ API_KEY = os.environ.get("ANYTHINGLLM_API_KEY", "NMKH7EQ-5GD4R3Z-G6CVWRH-8ZPE22V
 def home():
     return "Flask çalışıyor! Chat için /chat rotasını kullanın (POST isteği)."
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
     #EKLEDİĞİM YER
     if request.method == 'OPTIONS':
