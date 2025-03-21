@@ -35,6 +35,12 @@ def chat():
             "Content-Type": "application/json",
             "Authorization": f"Bearer {API_KEY}"
         }
+
+        payload = {
+            "message": user_message,
+            "mode": "chat",  # "chat" ya da "query" olarak değiştirebilirsiniz
+        }
+        
         response = requests.post(ANYTHINGLLM_API_URL, json={"message": user_message}, headers=headers, timeout=10)
         response.raise_for_status()
         
