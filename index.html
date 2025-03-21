@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Lokman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <img src="./photos/LOKman(1).png" alt="E-Lokman Logo" class="logo-img">
+                <div class="logo-text">
+                    <span>E-Lokman</span>
+                    <span>Sağlık Asistanı</span>
+                </div>
+            </a>
+            <div class="nav-buttons">
+                <a href="https://neyimvar.gov.tr" target="_blank" class="nav-btn neyim-var">
+                    <img src="./photos/neyimvar.jpeg" alt="Neyim Var">
+                    <span>NeyimVar?</span>
+                </a>
+                <a href="https://mhrs.gov.tr" target="_blank" class="nav-btn randevu">
+                    <img src="./photos/mhrs-logo.png" alt="Randevu Al">
+                    <span>Randevu Al</span>
+                </a>
+                <a href="https://enabiz.gov.tr" target="_blank" class="nav-btn e-nabiz">
+                    <img src="./photos/enbaız.jpeg" alt="e-Nabız">
+                    <span>e-Nabız</span>
+                </a>
+                <a href="#" class="nav-btn harita">
+                    <img src="./photos/hospitallogo.png" alt="Hastaneler">
+                    <span>Hastaneler</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <img src="./photos/AI Asistanın Olsun.png" alt="AI Asistan">
+    </section>
+
+    <main>
+        <div class="giris-container">
+            <h2>E-Lokman'a Hoş Geldiniz</h2>
+            <div class="giris-secenekleri">
+                <div class="edevlet-giris">
+                    <button onclick="window.location.href='https://giris.turkiye.gov.tr/Giris/'">
+                        <img src="./photos/edevlett.png" alt="e-Devlet Logo">
+                        <p>e-Devlet ile Giriş</p>  
+                    </button>
+                </div>
+                
+                <div class="form-ayrac">
+                    <span>veya</span>
+                </div>
+
+                <div class="login-container">
+                    <form id="loginForm" onsubmit="return validateLogin(event)">
+                        <div class="input-group">
+                            <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder="Şifre" required>
+                        </div>
+                        <button type="submit" class="login-btn">Giriş Yap</button>
+                    </form>
+                </div>
+                
+                <div class="kayit-link">
+                    <button class="kayit-btn" id="kayitBtn">Hemen Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kayıt Modal -->
+        <div id="kayitModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Kayıt Ol</h2>
+                <div class="form-scroll">
+                    <form id="kayitFormu">
+                        <div class="form-grup">
+                            <label for="tc">T.C. Kimlik No:</label>
+                            <input type="text" id="tc" maxlength="11" pattern="\d{11}" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="ad">Ad:</label>
+                            <input type="text" id="ad" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="soyad">Soyad:</label>
+                            <input type="text" id="soyad" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="dogumTarihi">Doğum Tarihi:</label>
+                            <input type="date" id="dogumTarihi" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="telefon">Telefon:</label>
+                            <input type="tel" id="telefon" pattern="\d{10}" placeholder="5XX XXX XX XX" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="kayitEposta">E-posta:</label>
+                            <input type="email" id="kayitEposta" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="kayitSifre">Şifre:</label>
+                            <input type="password" id="kayitSifre" required>
+                        </div>
+                        <div class="form-grup">
+                            <label for="sifreTekrar">Şifre Tekrar:</label>
+                            <input type="password" id="sifreTekrar" required>
+                        </div>
+                        <div class="form-grup">
+                            <label>
+                                <input type="checkbox" id="kvkk" required>
+                                KVKK şartlarını okudum ve kabul ediyorum
+                            </label>
+                        </div>
+                        <button type="submit" class="kayit-gonder-btn">
+                            <span>Kayıt Ol</span>
+                            <div class="dalga"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Şifremi Unuttum Modal -->
+        <div id="sifremiUnuttumModal" class="modal">
+            <div class="modal-icerik">
+                <span class="kapat">&times;</span>
+                <h2>Şifremi Unuttum</h2>
+                <form id="sifremiUnuttumFormu">
+                    <div class="form-grup">
+                        <label for="sifremiUnuttumEposta">E-posta:</label>
+                        <input type="email" id="sifremiUnuttumEposta" required>
+                    </div>
+                    <button type="submit" class="sifre-sifirla-btn">
+                        <span>Şifre Sıfırlama Linki Gönder</span>
+                        <div class="dalga"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Hastaneler Modal -->
+        <div id="hastaneModal" class="modal">
+            <div class="modal-icerik hastane-modal">
+                <span class="kapat">&times;</span>
+                <h2>Hastaneler</h2>
+                <div class="hastane-arama">
+                    <input type="text" id="hastaneArama" placeholder="Hastane veya şehir ara...">
+                    <select id="sehirFiltre">
+                        <option value="">Tüm Şehirler</option>
+                        <option value="1">Adana</option>
+                        <option value="2">Adıyaman</option>
+                        <option value="3">Afyonkarahisar</option>
+                        <option value="4">Ağrı</option>
+                        <option value="5">Amasya</option>
+                        <option value="6">Ankara</option>
+                        <option value="7">Antalya</option>
+                        <option value="8">Artvin</option>
+                        <option value="9">Aydın</option>
+                        <option value="10">Balıkesir</option>
+                        <option value="11">Bilecik</option>
+                        <option value="12">Bingöl</option>
+                        <option value="13">Bitlis</option>
+                        <option value="14">Bolu</option>
+                        <option value="15">Burdur</option>
+                        <option value="16">Bursa</option>
+                        <option value="17">Çanakkale</option>
+                        <option value="18">Çankırı</option>
+                        <option value="19">Çorum</option>
+                        <option value="20">Denizli</option>
+                        <option value="21">Diyarbakır</option>
+                        <option value="22">Edirne</option>
+                        <option value="23">Elazığ</option>
+                        <option value="24">Erzincan</option>
+                        <option value="25">Erzurum</option>
+                        <option value="26">Eskişehir</option>
+                        <option value="27">Gaziantep</option>
+                        <option value="28">Giresun</option>
+                        <option value="29">Gümüşhane</option>
+                        <option value="30">Hakkari</option>
+                        <option value="31">Hatay</option>
+                        <option value="32">Isparta</option>
+                        <option value="33">Mersin</option>
+                        <option value="34">İstanbul</option>
+                        <option value="35">İzmir</option>
+                        <option value="36">Kars</option>
+                        <option value="37">Kastamonu</option>
+                        <option value="38">Kayseri</option>
+                        <option value="39">Kırklareli</option>
+                        <option value="40">Kırşehir</option>
+                        <option value="41">Kocaeli</option>
+                        <option value="42">Konya</option>
+                        <option value="43">Kütahya</option>
+                        <option value="44">Malatya</option>
+                        <option value="45">Manisa</option>
+                        <option value="46">Kahramanmaraş</option>
+                        <option value="47">Mardin</option>
+                        <option value="48">Muğla</option>
+                        <option value="49">Muş</option>
+                        <option value="50">Nevşehir</option>
+                        <option value="51">Niğde</option>
+                        <option value="52">Ordu</option>
+                        <option value="53">Rize</option>
+                        <option value="54">Sakarya</option>
+                        <option value="55">Samsun</option>
+                        <option value="56">Siirt</option>
+                        <option value="57">Sinop</option>
+                        <option value="58">Sivas</option>
+                        <option value="59">Tekirdağ</option>
+                        <option value="60">Tokat</option>
+                        <option value="61">Trabzon</option>
+                        <option value="62">Tunceli</option>
+                        <option value="63">Şanlıurfa</option>
+                        <option value="64">Uşak</option>
+                        <option value="65">Van</option>
+                        <option value="66">Yozgat</option>
+                        <option value="67">Zonguldak</option>
+                        <option value="68">Aksaray</option>
+                        <option value="69">Bayburt</option>
+                        <option value="70">Karaman</option>
+                        <option value="71">Kırıkkale</option>
+                        <option value="72">Batman</option>
+                        <option value="73">Şırnak</option>
+                        <option value="74">Bartın</option>
+                        <option value="75">Ardahan</option>
+                        <option value="76">Iğdır</option>
+                        <option value="77">Yalova</option>
+                        <option value="78">Karabük</option>
+                        <option value="79">Kilis</option>
+                        <option value="80">Osmaniye</option>
+                        <option value="81">Düzce</option>
+                    </select>
+                </div>
+                <div class="hastane-liste-container">
+                    <div id="hastaneListesi" class="hastane-liste">
+                        <!-- Hastaneler JavaScript ile buraya eklenecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-icerik">
+            <div class="footer-bolum">
+                <h3>E-Lokman</h3>
+                <p>Senin Sağlık Asistanın</p>
+            </div>
+        </div>
+        <div class="footer-alt">
+            <p>&copy; 2025 E-Lokman. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    function validateLogin(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        if (username === 'admin' && password === 'admin') {
+            window.location.href = 'dashboard/ana-panel.html';
+        } else {
+            alert('Kullanıcı adı veya şifre hatalı!');
+        }
+        
+        return false;
+    }
+    </script>
+</body>
+</html>

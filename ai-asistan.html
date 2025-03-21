@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sağlık Asistanı - E-Lokman</title>
+    <link rel="stylesheet" href="ana-panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar aynı kalacak -->
+        <!-- Ana İçerik -->
+        <div class="main-content" id="mainContent">
+            <div class="content-header">
+                <button id="toggleSidebar" class="toggle-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1>AI Sağlık Asistanınız</h1>
+                    <p>Sağlık sorularınız için size özel asistan</p>
+                </div>
+            </div>
+            
+            <div class="ai-chat-full">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <div class="message-info">
+                            <img src="../assets/ai-avatar.png" alt="AI" class="message-avatar">
+                            <span class="message-sender">E-Lokman AI</span>
+                        </div>
+                        <div class="message-bubble">
+                            <p>Merhaba! Size nasıl yardımcı olabilirim?</p>
+                        </div>
+                        <span class="message-time">Şimdi</span>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <div class="input-wrapper">
+                        <input type="text" id="userInput" placeholder="Sağlığınızla ilgili her şeyi sorabilirsiniz...">
+                        <button class="input-action-btn">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                    <button class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
