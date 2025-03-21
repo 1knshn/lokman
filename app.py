@@ -7,8 +7,8 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 # AnythingLLM API URL ve anahtar DÜZELTİLEN
-ANYTHINGLLM_API_URL = "https://5gu2w6v6.rpcl.host/api/v1/workspace/lokmanchat/chat"
-API_KEY = "Bearer NMKH7EQ-5GD4R3Z-G6CVWRH-8ZPE22V"
+ANYTHINGLLM_API_URL = "https://5gu2w6v6.rpcl.host/api/v1/workspace/lokman/chat"
+API_KEY = "NMKH7EQ-5GD4R3Z-G6CVWRH-8ZPE22V"
 
 @app.route('/')
 def home():
