@@ -17,11 +17,11 @@ def home():
 @app.route('/chat', methods=['POST'])
 def chat():
 
-    if request.method == 'OPTIONS':
+   if request.method == 'OPTIONS':
         response = jsonify({'status': 'success'})
         response.headers.add('Access-Control-Allow-Origin', '*')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+        response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
         return response
 
     try:
