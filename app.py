@@ -23,6 +23,7 @@ def chat():
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
         response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
         return response
+        
 
     try:
         user_message = request.json.get("message")
@@ -39,7 +40,7 @@ def chat():
         
         llm_response = response.json()
         print(f"AnythingLLM yanıtı: {llm_response}")
-        reply = llm_response.get("reply", "Yanıt alınamadı.")
+        reply = llm_response.get("textResponse", "Yanıt alınamadı.")
         return jsonify({"reply": reply})
     
     except requests.exceptions.RequestException as e:
