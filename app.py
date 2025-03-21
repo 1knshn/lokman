@@ -37,7 +37,7 @@ def chat():
         }
 
         payload = {
-            "message": user_message,
+            "message": user_message, #BURAYA DİKKAT SİLEBİLİRSİN ÇALIŞMAZSA
             "mode": "chat",  # "chat" ya da "query" olarak değiştirebilirsiniz
         }
         
