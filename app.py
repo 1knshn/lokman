@@ -10,12 +10,28 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Gemini API Anahtarı ve URL
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k")
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-2.0-pro-exp-02-05:generateContent?key={GEMINI_API_KEY}"
+
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+
+generation_config = {
+    "temperature": 1,
+    "top_p": 0.95,
+    "top_k": 40,
+    "max_output_tokens": 8192,
+    "response_mime_type": "text/plain",
+}
+
+# Model oluşturma
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-pro",
+    generation_config=generation_config,
+    system_instruction="Based on the symptoms and questions provided by the user, predict possible diseases, suggest necessary precautions, and always recommend the appropriate hospital department. Ensure that responses are clear, concise, and informative. Always say: This is just Lokman's prediction, you need to see a doctor for diagnosis!"
+)
 
 @app.route('/')
 def home():
     return "Flask çalışıyor! Gemini Chat için /chat rotasını kullanın (POST isteği)."
-
 @app.route('/chat', methods=['POST', 'OPTIONS'])
 @app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
