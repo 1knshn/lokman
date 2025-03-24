@@ -43,7 +43,7 @@ def chat():
             return jsonify({"reply": "Mesaj boş olamaz."}), 400
         
         # Dinamik System Instruction: Örneğin, kullanıcı mesajına göre değişebilir.
-        system_instruction = f"Based on the symptoms and questions provided by the user, predict possible diseases related to '{user_message}', suggest necessary precautions, and always recommend the appropriate hospital department. Ensure that responses are clear, concise, and informative. Always say: This is just Lokman's prediction, you need to see a doctor for diagnosis!"
+        system_instruction = f"Kullanıcının belirttiği semptomlar doğrultusunda '{user_message}', yalnızca sağlık alanında yanıt ver. Semptomlarla ilişkili olası hastalıkları tahmin et, belirtileri azaltmak için önerilerde bulun ve hangi polikliniğe başvurulması gerektiğini belirt. Eğer mümkünse, reçetesiz satılan ilaçlar veya destekleyici tedaviler hakkında öneriler yap ancak kesinlikle ilaç isimlerini verirken 'Bu sadece belirtilerinizi hafifletmeniz için söylenen bir öneridir, ilacı kullanmadan önce doktor onayı almanızı öneririm.' şeklinde uyarıda bulun. Cevaplarının sonunda mutlaka şunu ekle: 'Bu sadece Lokman'ın tahminidir. Kesin bir teşhis için doktora görünmelisiniz.'"
 
         # Model oluşturma
         model = genai.GenerativeModel(
