@@ -10,7 +10,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Gemini API Anahtarı ve URL
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k")
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-2.0-pro-exp-02-05:generateContent?key={GEMINI_API_KEY}"
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
 
 genai.configure(api_key=os.environ["AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k"])
 
