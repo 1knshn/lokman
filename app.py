@@ -10,7 +10,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Gemini API Anahtarı ve URL
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k")
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
 
 @app.route('/')
 def home():
@@ -35,10 +35,13 @@ def chat():
             "Content-Type": "application/json"
         }
         payload = {
-            "contents": [
-                {"parts": [{"text": user_message}]}
-            ]
+    "contents": [
+        {"role": "user", "parts": [{"text": user_message}]}
+        ],
+        "generationConfig": {
+        "maxOutputTokens": 500  # Daha kısa yanıtlar için sınır koyduk.
         }
+}
 
         response = requests.post(GEMINI_API_URL, json=payload, headers=headers)
         response.raise_for_status()
@@ -53,5 +56,5 @@ def chat():
         return jsonify({"reply": f"Genel hata: {str(e)}"}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
