@@ -12,7 +12,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
 
-genai.configure(api_key=os.environ["AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k"])
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 generation_config = {
     "temperature": 1,
