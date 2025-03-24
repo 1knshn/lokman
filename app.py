@@ -17,6 +17,7 @@ def home():
     return "Flask çalışıyor! Gemini Chat için /chat rotasını kullanın (POST isteği)."
 
 @app.route('/chat', methods=['POST', 'OPTIONS'])
+@app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
     if request.method == 'OPTIONS':
         response = jsonify({'status': 'success'})
@@ -26,7 +27,9 @@ def chat():
         return response
 
     try:
-        user_message = request.json.get("message")
+        # 'contents' içinde kullanıcı mesajını alın
+        user_message = request.json.get("contents", [{}])[0].get("parts", [{}])[0].get("text", "")
+        
         if not user_message:
             return jsonify({"reply": "Mesaj boş olamaz."}), 400
 
@@ -35,13 +38,13 @@ def chat():
             "Content-Type": "application/json"
         }
         payload = {
-    "contents": [
-        {"role": "user", "parts": [{"text": user_message}]}
-        ],
-        "generationConfig": {
-        "maxOutputTokens": 500  # Daha kısa yanıtlar için sınır koyduk.
+            "contents": [
+                {"role": "user", "parts": [{"text": user_message}]}
+            ],
+            "generationConfig": {
+                "maxOutputTokens": 500
+            }
         }
-}
 
         response = requests.post(GEMINI_API_URL, json=payload, headers=headers)
         response.raise_for_status()
@@ -54,6 +57,7 @@ def chat():
         return jsonify({"reply": f"Gemini API hatası: {str(e)}"}), 500
     except Exception as e:
         return jsonify({"reply": f"Genel hata: {str(e)}"}), 500
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
