@@ -4,14 +4,14 @@ import requests
 import os
 import google.generativeai as genai
 
-
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Gemini API Anahtarı ve URL
+# API Key ve Gemini URL ayarları
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB3PrvUYsD_3nbmsSr8cb4s3Vm5oqGJd7k")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
 
+# Google generative AI yapılandırması
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 generation_config = {
@@ -32,7 +32,7 @@ model = genai.GenerativeModel(
 @app.route('/')
 def home():
     return "Flask çalışıyor! Gemini Chat için /chat rotasını kullanın (POST isteği)."
-@app.route('/chat', methods=['POST', 'OPTIONS'])
+
 @app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
     if request.method == 'OPTIONS':
@@ -49,31 +49,17 @@ def chat():
         if not user_message:
             return jsonify({"reply": "Mesaj boş olamaz."}), 400
 
-        # Gemini API'ye istek gönder
-        headers = {
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "contents": [
-                {"role": "user", "parts": [{"text": user_message}]}
-            ],
-            "generationConfig": {
-                "maxOutputTokens": 1000
-            }
-        }
+        # Google generative AI kullanarak yanıt oluştur
+        chat_session = model.start_chat(history=[])
+        response = chat_session.send_message(user_message)
 
-        response = requests.post(GEMINI_API_URL, json=payload, headers=headers)
-        response.raise_for_status()
-
-        result = response.json()
-        reply = result.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "Yanıt alınamadı.")
-        return jsonify({"reply": reply})
+        # Yanıtı JSON formatında dön
+        return jsonify({"reply": response.text})
 
     except requests.exceptions.RequestException as e:
         return jsonify({"reply": f"Gemini API hatası: {str(e)}"}), 500
     except Exception as e:
         return jsonify({"reply": f"Genel hata: {str(e)}"}), 500
-
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
