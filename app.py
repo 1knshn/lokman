@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 # API Key ve Gemini URL ayarları
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCNfB4SYPTAp7bQeeaxTEKxCZ3-GW0cVXw")  # Burada kendi API anahtarınızı kullanın
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCmjmHXsY9f6087ycXecxaGY0jPcS5SSu4")  # Burada kendi API anahtarınızı kullanın
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Gemini 1.5 Pro Model URL
