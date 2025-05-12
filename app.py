@@ -10,8 +10,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCmjmHXsY9f6087ycXecxaGY0jPcS5SSu4")  # Burada kendi API anahtarınızı kullanın
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Gemini 1.5 Pro Model URL
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key={GEMINI_API_KEY}"
+# Gemini 2.0 Flash Model URL
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
 
 # Generation config
 generation_config = {
@@ -47,7 +47,7 @@ def chat():
 
         # Model oluşturma
         model = genai.GenerativeModel(
-            model_name="gemini-1.5-pro",
+            model_name="gemini-2.0-flash",
             generation_config=generation_config,
             system_instruction=system_instruction
         )
